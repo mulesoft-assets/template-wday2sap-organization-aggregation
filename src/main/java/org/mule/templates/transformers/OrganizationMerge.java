@@ -35,9 +35,13 @@ public class OrganizationMerge {
 		// Put all organizations from A in the merged List
 		for (Map<String, String> organizationFromA : organizationsFromOrgA) {
 			Map<String, String> mergedOrganization = createMergedOrganization(organizationFromA);
-			mergedOrganization.put("IDInA", organizationFromA.get("Id"));
-			mergedOrganization.put("IndustryInA", organizationFromA.get("Industry"));
-			mergedOrganization.put("NumberOfEmployeesInA", organizationFromA.get("NumberOfEmployees"));
+
+			if(mergedOrganization == null) {
+				continue;
+			}
+			
+			mergedOrganization.put("IdInWorkday", organizationFromA.get("Id"));
+			mergedOrganization.put("AvailibilityDateInWorkday", organizationFromA.get("EndDate"));
 			mergedOrganizationList.add(mergedOrganization);
 		}
 
@@ -45,14 +49,17 @@ public class OrganizationMerge {
 		for (Map<String, String> organizationFromB : organizationsFromOrgB) {
 			Map<String, String> organizationFromA = findOrganizationInList(organizationFromB.get("Name"), mergedOrganizationList);
 			if (organizationFromA != null) {
-				organizationFromA.put("IDInB", organizationFromB.get("Id"));
-				organizationFromA.put("IndustryInB", organizationFromB.get("Industry"));
-				organizationFromA.put("NumberOfEmployeesInB", organizationFromB.get("NumberOfEmployees"));
+				organizationFromA.put("IdInSap", organizationFromB.get("Id"));
+				organizationFromA.put("EndDateInSap", organizationFromB.get("EndDate"));
 			} else {
 				Map<String, String> mergedOrganization = createMergedOrganization(organizationFromB);
-				mergedOrganization.put("IDInB", organizationFromB.get("Id"));
-				mergedOrganization.put("IndustryInB", organizationFromB.get("Industry"));
-				mergedOrganization.put("NumberOfEmployeesInB", organizationFromB.get("NumberOfEmployees"));
+
+				if(mergedOrganization == null) {
+					continue;
+				}
+				
+				mergedOrganization.put("IdInSap", organizationFromB.get("Id"));
+				mergedOrganization.put("EndDateInSap", organizationFromB.get("EndDate"));
 				mergedOrganizationList.add(mergedOrganization);
 			}
 
@@ -61,20 +68,30 @@ public class OrganizationMerge {
 	}
 
 	private Map<String, String> createMergedOrganization(Map<String, String> organization) {
+		// don't create a merged organization if it doesn't have a name
+		if(organization.get("Name") == null || "".equals(organization.get("Name"))) {
+			return null;
+		}
+		
 		Map<String, String> mergedOrganization = new HashMap<String, String>();
 		mergedOrganization.put("Name", organization.get("Name"));
-		mergedOrganization.put("IDInA", "");
-		mergedOrganization.put("IndustryInA", "");
-		mergedOrganization.put("NumberOfEmployeesInA", "");
-		mergedOrganization.put("IDInB", "");
-		mergedOrganization.put("IndustryInB", "");
-		mergedOrganization.put("NumberOfEmployeesInB", "");
+		mergedOrganization.put("IdInWorkday", "");
+		mergedOrganization.put("AvailibilityDateInWorkday", "");
+		mergedOrganization.put("IdInSap", "");
+		mergedOrganization.put("EndDateInSap", "");
 		return mergedOrganization;
 	}
 
 	private Map<String, String> findOrganizationInList(String organizationName, List<Map<String, String>> orgList) {
+		if(organizationName == null) {
+			return null;
+		}
+		
 		for (Map<String, String> org : orgList) {
-			if (org.get("Name").equals(organizationName)) {
+			String orgName = org.get("Name");
+			if(orgName == null) {
+				return null;
+			} else if (orgName.equals(organizationName)) {
 				return org;
 			}
 		}

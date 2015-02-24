@@ -8,7 +8,6 @@ package org.mule.templates.transformers;
 
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -16,8 +15,6 @@ import org.apache.commons.lang.StringUtils;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.transformer.AbstractMessageTransformer;
-
-import com.google.common.collect.Lists;
 
 /**
  * This transformer will sort a list of map defining a weight for each map base
@@ -32,7 +29,7 @@ public class SortOrganizationList extends AbstractMessageTransformer {
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
 
-		List<Map<String, String>> sortedOrganizationList = Lists.newArrayList((Iterator<Map<String, String>>) message.getPayload());
+		List<Map<String, String>> sortedOrganizationList = (List<Map<String, String>>) message.getPayload();
 
 		Collections.sort(sortedOrganizationList, organizationMapComparator);
 
@@ -52,17 +49,17 @@ public class SortOrganizationList extends AbstractMessageTransformer {
 		private String buildKey(Map<String, String> org) {
 			StringBuilder key = new StringBuilder();
 
-			if (StringUtils.isNotBlank(org.get("IDInA")) && StringUtils.isNotBlank(org.get("IDInB"))) {
+			if (StringUtils.isNotBlank(org.get("IdInWorkday")) && StringUtils.isNotBlank(org.get("IdInSap"))) {
 				key.append("~~~");
 				key.append(org.get(IDENTITY_FIELD_KEY));
 			}
 
-			if (StringUtils.isNotBlank(org.get("IDInA")) && StringUtils.isBlank(org.get("IDInB"))) {
+			if (StringUtils.isNotBlank(org.get("IdInWorkday")) && StringUtils.isBlank(org.get("IdInSap"))) {
 				key.append("~");
 				key.append(org.get(IDENTITY_FIELD_KEY));
 			}
 
-			if (StringUtils.isBlank(org.get("IDInA")) && StringUtils.isNotBlank(org.get("IDInB"))) {
+			if (StringUtils.isBlank(org.get("IdInWorkday")) && StringUtils.isNotBlank(org.get("IdInSap"))) {
 				key.append("~~");
 				key.append(org.get(IDENTITY_FIELD_KEY));
 			}
