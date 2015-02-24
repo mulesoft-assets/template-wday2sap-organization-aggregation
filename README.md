@@ -109,7 +109,7 @@ Complete all properties in one of the property files, for example in [mule.prod.
 
 ## Running on CloudHub <a name="runoncloudhub"/>
 While [creating your application on CloudHub](http://www.mulesoft.org/documentation/display/current/Hello+World+on+CloudHub) (Or you can do it later as a next step), you need to go to Deployment > Advanced to set all environment variables detailed in **Properties to be configured** as well as the **mule.env**.
-Once your app is all set and started, supposing you choose as domain name `workdayworkersaggregation` to trigger the use case you just need to hit `http://workdayworkersaggregation.cloudhub.io/generatereport` and the report will be sent to the emails configured.
+Once your app is all set and started, supposing you choose as domain name `workdayorganizationsaggregation` to trigger the use case you just need to hit `http://workdayorganizationsaggregation.cloudhub.io/generatereport` and the report will be sent to the emails configured.
 
 ### Deploying your Anypoint Template on CloudHub <a name="deployingyouranypointtemplateoncloudhub"/>
 Mule Studio provides you with really easy way to deploy your Template directly to CloudHub, for the specific steps to do so please check this [link](http://www.mulesoft.org/documentation/display/current/Deploying+Mule+Applications#DeployingMuleApplications-DeploytoCloudHub)
@@ -175,45 +175,47 @@ The *mainFlow* organises the job in three different steps and finally invokes th
 This flow has Exception Strategy that basically consists on invoking the *defaultChoiseExceptionStrategy* defined in *errorHandling.xml* file.
 
 ### Gather Data Flow
-[Java Transformer](http://www.mulesoft.org/documentation/display/current/Java+Transformer+Reference) responsible for aggregating the results from SAP and Workday.
+[Scatter Gather](http://www.mulesoft.org/documentation/display/current/Scatter-Gather) is responsible for aggregating the results from SAP and Workday.
 Criteria and format applied:
 
-+ Transformer calls two subflows where data are loaded from both Workday and SAP and aggregated to the List of Maps with keys: **Name**, **OrgTypeInWorkday**, **IDInWorkday** and **IDInSAP**.
-+ Organizations will be matched by name, that is to say, a record in Workday and SAP organizations with the same name is considered the same organization.
++ Scatter Gather component implements an aggregation strategy where data loaded from both Workday and SAP and aggregated to the List of Maps with keys: **Name**, **IdInWorkday**, **IdInSap**, **AvailibilityDateInWorkday** and **EndDateInSap**.
++ Organizations will be matched by name, that is to say, an organization in Workday and SAP with the same name is considered the same organization.
 
 ### sapRetrievalMapperFlow
-Organizations are loaded by [SAP connector](http://www.mulesoft.org/documentation/display/current/SAP+Connector) to List of Maps with keys: **Id** and **Name**
+Organizations are loaded by [SAP connector](http://www.mulesoft.org/documentation/display/current/SAP+Connector) to List of Maps with keys: **Id**, **Name** and **EndDate**
 
 ### workdayRetrievalMapperFlow
-Organizations are loaded by [Workday connector](http://www.mulesoft.org/documentation/display/current/Workday+Connector) to List of Maps with keys: **Id**, **Name** and **OrgType**
+Organizations are loaded by [Workday connector](http://www.mulesoft.org/documentation/display/current/Workday+Connector) to List of Maps with keys: **Id**, **Name** and **EndDate**
 
 ### Format Output Flow
-[Java Transformer](http://www.mulesoft.org/documentation/display/current/Java+Transformer+Reference) responsible for sorting the list of users in the following order:
+[Java Transformer](http://www.mulesoft.org/documentation/display/current/Java+Transformer+Reference) responsible for sorting the list of organizations in the following order:
 
 1. Organizations only in Workday
 2. Organizations only in SAP
 3. Organizations in both Workday and SAP
 
-All records ordered alphabetically by mail within each category.
+All records ordered alphabetically by name within each category.
 If you want to change this order then the *compare* method should be modified.
 
-+ CSV Report [DataMapper](http://www.mulesoft.org/documentation/display/current/Datamapper+User+Guide+and+Reference) transforming the List of Maps in CSV with headers **Name**, **OrgTypeInWorkday**, **IDInWorkday** and **IDInSAP**.
++ CSV Report [DataMapper](http://www.mulesoft.org/documentation/display/current/Datamapper+User+Guide+and+Reference) transforming the List of Maps in CSV with headers **Name**, **ID in Workday**, **Availibility Date in Workday**, **ID in SAP**  and **End Date in SAP**.
 + An [Object to string transformer](http://www.mulesoft.org/documentation/display/current/Transformers) is used to set the payload as an String.
 
 
 
 ## endpoints.xml<a name="endpointsxml"/>
 This is the file where you will found the inbound and outbound sides of your integration app.
-This Template has an [HTTP Inbound Endpoint](http://www.mulesoft.org/documentation/display/current/HTTP+Endpoint+Reference) as the way to trigger the use case and an [SMTP Transport](http://www.mulesoft.org/documentation/display/current/SMTP+Transport+Reference) as the outbound way to send the report.
+This Template has a [HTTP Listener Connector](http://www.mulesoft.org/documentation/display/current/HTTP+Listener+Connector) as the way to trigger the use case and an [SMTP Transport](http://www.mulesoft.org/documentation/display/current/SMTP+Transport+Reference) as the outbound way to send the report.
 
 ### Trigger Flow
-**HTTP Inbound Endpoint** - Start Report Generation
+**HTTP Listener Connector** - Start Report Generation
+
 + `${http.port}` is set as a property to be defined either on a property file or in CloudHub environment variables.
 + The path configured by default is `generatereport` and you are free to change for the one you prefer.
-+ The host name for all endpoints in your CloudHub configuration should be defined as `localhost`. CloudHub will then route requests from your application domain URL to the endpoint.
++ The host name for all endpoints in your CloudHub configuration should be defined as `0.0.0.0`. CloudHub will then route requests from your application domain URL to the endpoint.
 
 ### Outbound Flow
 **SMTP Outbound Endpoint** - Send Mail
+
 + Both SMTP Server configuration and the actual mail to be sent are defined in this endpoint.
 + This flow is going to be invoked from the flow that does all the functional work: *mainFlow*, the same that is invoked from the Inbound Flow upon triggering of the HTTP Endpoint.
 
