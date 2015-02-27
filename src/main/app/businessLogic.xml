@@ -52,7 +52,6 @@ This flow should control the direction of the application, and it should be call
  	<import>
  		<PLANVERSION>01</PLANVERSION>
  		<OBJECTTYPE>O</OBJECTTYPE>
- 		<STARTDATE>20150101</STARTDATE>
  	</import>
  </BAPI_PDOTYPES_GETDETAILEDLIST>
  ]]></sap:definition>
