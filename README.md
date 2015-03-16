@@ -32,7 +32,7 @@ For practical purposes this Template will generate the result in the format of a
 
 This Template should serve as a foundation for extracting data from two systems, aggregating data, comparing values of fields for the objects, and generating a report on the differences. 
 
-As implemented, it gets organizations from Workday and from SAP, compares by the name of the organizations, and generates a CSV file which shows organizations in Workday and in SAP. The report is then emailed to a configured group of email addresses.
+As implemented, it gets organizations from Workday and from SAP, compares by the name of the organizations, generates a CSV file which shows organizations in Workday and in SAP. The report is then emailed to a configured group of email addresses.
 
 # Considerations <a name="considerations"/>
 
@@ -63,6 +63,10 @@ There are no particular considerations for this Anypoint Template regarding Sap 
 ### As source of data
 
 The Workday connector currently does not support autopaging functionality out of the box so number of processed objects are limited to the connector's single page size.
+
+
+
+
 
 
 # Run it! <a name="runit"/>

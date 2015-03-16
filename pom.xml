@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.mule.templates</groupId>
 		<artifactId>templates-tooling-parent-pom</artifactId>
-		<version>1.1.1</version>
+		<version>1.1.6</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -24,7 +24,6 @@
 		<sap.jco.version>3.0.10</sap.jco.version>
 		<sap.idoc.version>3.0.10</sap.idoc.version>
 		<sap.build.type>mac64</sap.build.type>
-		<wday.version>4.0.1</wday.version>
 	</properties>
 
 	<build>
@@ -108,11 +107,6 @@
 			<version>${sap.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.mule.modules</groupId>
-			<artifactId>mule-module-workday</artifactId>
-			<version>${wday.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.mule.transports</groupId>
 			<artifactId>mule-transport-email</artifactId>
 			<version>${mule.version}</version>
@@ -146,7 +140,7 @@
 		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-module-workday-humanresources</artifactId>
-			<version>4.1.1</version>
+			<version>${wday.hr.version}</version>
 		</dependency>
 	<dependency>
             <groupId>com.mulesoft.muleesb.modules</groupId>
@@ -168,11 +162,6 @@
 			<name>MuleSoft Snapshots Repository</name>
 			<url>https://repository.mulesoft.org/nexus/content/repositories/snapshots/</url>
 			<layout>default</layout>
-		</repository>
-		<repository>
-			<id>mule-ee-releases</id>
-			<name>Mule Release Repository</name>
-			<url>https://repository-master.mulesoft.org/nexus/content/repositories/releases-ee/</url>
 		</repository>
 		<repository>
 			<id>mule-ee-thirdparty</id>
