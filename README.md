@@ -1,5 +1,5 @@
 
-# Anypoint Template: Workday to SAP Organization Aggregation
+# Anypoint Template: Workday and SAP Organization Aggregation
 
 + [License Agreement](#licenseagreement)
 + [Use Case](#usecase)
@@ -70,7 +70,7 @@ The Workday connector currently does not support autopaging functionality out of
 
 
 # Run it! <a name="runit"/>
-Simple steps to get Workday to SAP Organization Aggregation running.
+Simple steps to get Workday and SAP Organization Aggregation running.
 
 
 ## Running on premise <a name="runonopremise"/>
