@@ -52,6 +52,7 @@ public class OrganizationMergeAggregationStrategy implements AggregationStrategy
 		return new DefaultMuleEvent(message, originalEvent);
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private List<Map<String, String>> getOrganizationList(List<MuleEvent> events, int index) {
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 		if (events.get(index).getMessage().getPayload() instanceof ConsumerIterator) {
