@@ -201,7 +201,7 @@ Organizations are loaded by [Workday connector](http://www.mulesoft.org/document
 All records ordered alphabetically by name within each category.
 If you want to change this order then the *compare* method should be modified.
 
-+ CSV Report [DataMapper](http://www.mulesoft.org/documentation/display/current/Datamapper+User+Guide+and+Reference) transforming the List of Maps in CSV with headers **Name**, **ID in Workday**, **Availibility Date in Workday**, **ID in SAP**  and **End Date in SAP**.
++ CSV Report [DataWeave](http://developer.mulesoft.com/docs/dataweave) transforming the List of Maps in CSV with headers **Name**, **ID in Workday**, **Availibility Date in Workday**, **ID in SAP**  and **End Date in SAP**.
 + An [Object to string transformer](http://www.mulesoft.org/documentation/display/current/Transformers) is used to set the payload as an String.
 
 
