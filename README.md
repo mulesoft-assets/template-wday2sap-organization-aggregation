@@ -127,7 +127,7 @@ In order to use this Mule Anypoint Template you need to configure properties (Cr
 #### Workday Connector configuration
 + wday.user `bob.dylan@orga`
 + wday.password `DylanPassword123`
-+ wday.endpoint `http://localhost:8080/ccx/service/company_pt1/Human_Resources/v21.1`
++ wday.endpoint `http://localhost:8080/ccx/service/company_pt1/Human_Resources/v23.1`
 
 ### SAP Connector configuration
 + sap.jco.ashost `your.sap.address.com`
@@ -137,7 +137,7 @@ In order to use this Mule Anypoint Template you need to configure properties (Cr
 + sap.jco.client `800`
 + sap.jco.lang `EN`
 
-#### SMPT Services configuration
+#### SMTP Services configuration
 + smtp.host `smtp.gmail.com`
 + smtp.port `587`
 + smtp.user `exampleuser@gmail.com`
