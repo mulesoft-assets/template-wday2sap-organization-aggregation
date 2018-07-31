@@ -38,7 +38,7 @@ As implemented, it gets organizations from Workday and from SAP, compares by the
 
 To make this Anypoint Template run, there are certain preconditions that must be considered. All of them deal with the preparations in both, that must be made in order for all to run smoothly.
 **Failing to do so could lead to unexpected behavior of the template.**
-Before continue with the use of this Anypoint Template, you may want to check out this [Documentation Page](http://www.mulesoft.org/documentation/display/current/SAP+Connector#SAPConnector-EnablingYourStudioProjectforSAP), that will teach you how to work 
+Before continue with the use of this Anypoint Template, you may want to check out this [Documentation Page](https://docs.mulesoft.com/connectors/sap-connector#configuring-the-connector-in-studio-7), that will teach you how to work 
 with SAP and Anypoint Studio.
 ## Disclaimer
 This Anypoint template uses a few private Maven dependencies from Mulesoft in order to work. If you intend to run this template with Maven support, you need to add three extra dependencies for SAP to the pom.xml.
@@ -100,7 +100,9 @@ Once you have imported you Anypoint Template into Anypoint Studio you need to fo
 + Complete all the properties required as per the examples in the section [Properties to be configured](#propertiestobeconfigured)
 + Once that is done, right click on you Anypoint Template project folder 
 + Hover you mouse over `"Run as"`
-+ Click on  `"Mule Application"`
++ Click on  `"Mule Application (configure)"`
++ Inside the dialog, select Environment and set the variable `"mule.env"` to the value `"dev"`
++ Click `"Run"`
 
 
 ### Running on Mule ESB stand alone <a name="runonmuleesbstandalone"/>
