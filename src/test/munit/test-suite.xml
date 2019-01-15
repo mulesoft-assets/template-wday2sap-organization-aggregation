@@ -42,8 +42,8 @@ payload filter ($.Name == p('name.sap') or $.Name == p('name.wday') or $.Name ==
                 expression="#[payload[0].IDInSAP]" is="#[MunitTools::isEmptyOrNullString()]" message="The first record exists in SAP" />
             <munit-tools:assert-that doc:name="Assert that name in the second record is correct" doc:id="49fc0f70-a235-42b5-ba4a-a679608c217d"
                 is="#[MunitTools::equalTo(p('name.sap'))]" expression="#[payload[1].Name]" message="The second record is incorrect" />
-            <munit-tools:assert-that doc:name="Assert that secord record does not exist in Workday" doc:id="9f61e01d-1cbc-4abd-b986-da84863a0268"
-                expression="#[payload[1].IDInWorkday]" is="#[MunitTools::isEmptyOrNullString()]" message="The secord record exists in Workday" />
+            <munit-tools:assert-that doc:name="Assert that second record does not exist in Workday" doc:id="9f61e01d-1cbc-4abd-b986-da84863a0268"
+                expression="#[payload[1].IDInWorkday]" is="#[MunitTools::isEmptyOrNullString()]" message="The second record exists in Workday" />
             <munit-tools:assert-that doc:name="Assert that second record exists in SAP" doc:id="0ddaf264-84cc-475b-bbd2-744bfd194360"
                 is="#[MunitTools::not(MunitTools::isEmptyOrNullString())]" expression="#[payload[1].IDInSAP]" message="The second record doesn't exist in SAP" />
             <munit-tools:assert-that doc:name="Assert that name in the third record is correct" doc:id="d4b8a92e-a1a7-4fef-a0cf-d227af7dcd75"
