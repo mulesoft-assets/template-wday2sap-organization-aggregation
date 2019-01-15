@@ -27,13 +27,13 @@ ns ns0 urn:com.workday/bsvc
 }]]></ee:set-payload>
 					</ee:message>
 				</ee:transform>
-				<workday:invoke doc:name="Get organizations from Workday" doc:id="b03873c0-535e-43f4-8db6-4975f5867403" config-ref="Workday_Config" service="Human_Resources" operation="Get_Organizations"/>
+				<workday:human-resources operation="Get_Organizations" doc:name="Get organizations from Workday" doc:id="b385377c-0d7d-4b28-bb71-ed1392686deb" config-ref="Workday_Config"/>
 				<ee:transform doc:name="Transform Workday response" doc:id="f2114fbc-b82d-48ed-be3b-980252e6f446" >
 					<ee:message >
 						<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
 ---
-payload.body.Get_Organizations_Response.Response_Data.*Organization.Organization_Data map {
+payload.Get_Organizations_Response.Response_Data.*Organization.Organization_Data map {
 	Name : $.Name,
 	EndDate : $.Availibility_Date,
 	Id : $.Reference_ID
