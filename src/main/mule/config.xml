@@ -24,7 +24,7 @@
 
     <workday:config-version-30-config name="Workday_Config" doc:name="Workday Config version 30" doc:id="6de5cff8-8f79-46a4-abcb-4efaace248c9">
         <workday:basic-authentication-api-v30-connection username="${wday.username}" password="${wday.password}"
-            tenantName="${wday.tenant}" hostName="${wday.host}" responseTimeout="25000" />
+            tenantName="${wday.tenant}" hostName="${wday.host}" responseTimeout="${wday.responseTimeout}" />
     </workday:config-version-30-config>
 
     <sap:outbound-config name="SAP_Outbound" doc:id="5ad45eb4-44f4-4d06-bc20-8552d1ad11c4" doc:name="SAP Outbound">
