@@ -10,6 +10,7 @@ http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/em
 http://www.mulesoft.org/schema/mule/workday http://www.mulesoft.org/schema/mule/workday/current/mule-workday.xsd
 http://www.mulesoft.org/schema/mule/sap http://www.mulesoft.org/schema/mule/sap/current/mule-sap.xsd">
 	<flow name="businesslogicFlow">
+        <set-payload value="[]" doc:name="Set Payload to avoid issue with scatter-gather" doc:id="d99c7fe3-125a-4e2b-8d6b-e58f5e124d3e" />
 		<scatter-gather doc:name="Scatter-Gather">
             <route>
                  <ee:transform doc:name="Prepare Get Organizations request" doc:id="5ddb1536-1e04-4131-b020-a946b4d430b1" >
